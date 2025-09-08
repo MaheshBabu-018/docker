@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:14
+    container_name: my-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: maheshbabu
+      POSTGRES_PASSWORD: Srack@585
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my-python-app
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: mydb
+      DB_USER: maheshbabu
+      DB_PASS: Srack@585
